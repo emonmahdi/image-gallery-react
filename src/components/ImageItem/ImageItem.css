@@ -1,0 +1,17 @@
+.image-item {
+    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+  
+  .featured {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  

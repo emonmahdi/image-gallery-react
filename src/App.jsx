@@ -1,7 +1,17 @@
+import ImageGallery from "./components/ImageGallery/ImageGallery";
+
 function App() {
   return (
     <>
-      <h1>React Image Gallery</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ImageGallery />
+      </div>
     </>
   );
 }
