@@ -13,10 +13,14 @@ const ImageGallery = () => {
     "https://i.ibb.co/Wt1G0bq/Dining-2.jpg",
   ];
   return (
-    <div>
-      <h1 style={{ textAlign: "center", margin: "35px 30px" }}>
-        React Image Gallery
-      </h1>
+    <div className="gallery-body">
+      <div className="top-title-section">
+        <h2>Gallery</h2>
+        <h3>
+          <a href="">Delete Files</a>
+        </h3>
+      </div>
+      <hr />
       <div className="image-gallery">
         {images.map((image, index) => (
           <ImageItem key={index} src={image} isFeatured={index === 0} />
