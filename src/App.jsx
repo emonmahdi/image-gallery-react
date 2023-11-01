@@ -1,4 +1,5 @@
 import ImageGallery from "./components/ImageGallery/ImageGallery";
+// import Test from "./components/Test/Test";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         }}
       >
         <ImageGallery />
+        {/* <Test /> */}
       </div>
     </>
   );
