@@ -15,16 +15,16 @@ const ImageItem = ({ src, isFeatured, key }) => {
 
   return (
     <div className={`image-item ${isFeatured ? "featured" : ""}`}>
-      <img src={src} alt="Image" />
+      <img src={src} onChange={() => toggleImageSelection(key)} alt="Image" />
       <div
         className={`image-overlay ${
-          selectedImages.includes(key) ? "selected" : ""
+          selectedImages.includes(key) ? `selected` : ""
         }`}
       >
         <input
           type="checkbox"
           checked={selectedImages.includes(key)}
-          onChange={() => toggleImageSelection(key)}
+          onClick={() => toggleImageSelection(key)}
           className="input-checkbox"
         />
       </div>

@@ -33,6 +33,7 @@ img {
 .image-item:hover .image-overlay {
   opacity: 1;
 }
+
 .input-checkbox {
   position: absolute;
   top: 20px;
@@ -43,11 +44,14 @@ img {
   border-radius: 30%;
   cursor: pointer;
 }
+
+/* Activate the overlay color when the checkbox is checked */
 .image-overlay.selected {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.6
-  ); /* Change the overlay color for selected images */
+  background-color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+/* Apply hover effect for all images */
+.image-item:hover .image-overlay {
+  opacity: 1;
 }
