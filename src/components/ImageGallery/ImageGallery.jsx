@@ -12,21 +12,46 @@ import img10 from "./../../assets/images/image-10.jpeg";
 import img11 from "./../../assets/images/image-11.jpeg";
 
 import "./ImageGallery.css";
+import { useRef, useState } from "react";
 
-const ImageGallery = () => {
-  const images = [
-    `${img1}`,
-    `${img2}`,
-    `${img3}`,
-    `${img4}`,
-    `${img5}`,
-    `${img6}`,
-    `${img7}`,
-    `${img8}`,
-    `${img9}`,
-    `${img10}`,
-    `${img11}`,
-  ];
+const imagess = [
+  `${img1}`,
+  `${img2}`,
+  `${img3}`,
+  `${img4}`,
+  `${img5}`,
+  `${img6}`,
+  `${img7}`,
+  `${img8}`,
+  `${img9}`,
+  `${img10}`,
+  `${img11}`,
+];
+
+const ImageGallery = () => {  
+  const [images, setImages] = useState(imagess)
+  const dragItem = useRef(null)
+  const dragOverItem = useRef(null);
+
+// handle drag sorting
+  const handleSort = () => {
+    let imageItems = [...images]
+
+    // remove and save the dragged item content
+    const dragContentItem = imageItems.splice(dragItem.current, 1)[0]
+
+    // switch the position
+    imageItems.splice(dragOverItem.current, 0, dragContentItem)
+
+    // reset the position ref
+    dragItem.current= null
+    dragOverItem.current= null
+
+    // update the actual array 
+    setImages(imageItems)
+
+  }
+
   return (
     <div className="gallery-body">
       <div className="top-title-section">
@@ -37,8 +62,18 @@ const ImageGallery = () => {
       </div>
       <hr />
       <div className="image-gallery">
-        {images.map((image, index) => (
-          <ImageItem key={index} src={image} isFeatured={index === 0} />
+        {images?.map((image, index) => (
+          <ImageItem 
+          key={index} 
+          src={image} 
+          isFeatured={index === 0}
+          draggable
+          onDragStart={() => (dragItem.current=index)}
+          onDragEnter={() => (dragOverItem.current=index)}
+          onDragEnd={handleSort}
+          onDragOver={(e) => e.preventDefault()}
+          setImage={image}
+           />
         ))}
       </div>
     </div>

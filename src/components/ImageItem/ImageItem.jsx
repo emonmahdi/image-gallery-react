@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./ImageItem.css";
 
-const ImageItem = ({ src, isFeatured, key }) => {
+const ImageItem = ({ src, isFeatured, key, draggable, onDragStart, onDragEnter, onDragEnd, setImage }) => {
   const [selectedImages, setSelectedImages] = useState([]);
 
   const toggleImageSelection = (imageId) => {
@@ -14,7 +14,13 @@ const ImageItem = ({ src, isFeatured, key }) => {
   };
 
   return (
-    <div className={`image-item ${isFeatured ? "featured" : ""}`}>
+    <div draggable={draggable} 
+    className={`image-item ${isFeatured ? "featured" : ""}`}
+    onDragStart={onDragStart}
+    onDragEnter={onDragEnter}
+    onDragEnd={onDragEnd}
+    setSelectedImages={setImage}
+    >
       <img src={src} onChange={() => toggleImageSelection(key)} alt="Image" />
       <div
         className={`image-overlay ${
