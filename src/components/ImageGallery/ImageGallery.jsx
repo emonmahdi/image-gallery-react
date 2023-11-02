@@ -28,52 +28,88 @@ const imagess = [
   `${img11}`,
 ];
 
-const ImageGallery = () => {  
-  const [images, setImages] = useState(imagess)
-  const dragItem = useRef(null)
+const ImageGallery = () => {
+  const [images, setImages] = useState(imagess);
+  const dragItem = useRef(null);
   const dragOverItem = useRef(null);
 
-// handle drag sorting
+  // handle drag sorting
   const handleSort = () => {
-    let imageItems = [...images]
+    let imageItems = [...images];
 
     // remove and save the dragged item content
-    const dragContentItem = imageItems.splice(dragItem.current, 1)[0]
+    const dragContentItem = imageItems.splice(dragItem.current, 1)[0];
 
     // switch the position
-    imageItems.splice(dragOverItem.current, 0, dragContentItem)
+    imageItems.splice(dragOverItem.current, 0, dragContentItem);
 
     // reset the position ref
-    dragItem.current= null
-    dragOverItem.current= null
+    dragItem.current = null;
+    dragOverItem.current = null;
 
-    // update the actual array 
-    setImages(imageItems)
+    // update the actual array
+    setImages(imageItems);
+  };
 
-  }
+  // new
+  const [checked, setChecked] = useState([]);
+
+  const handleCheck = (event) => {
+    let updatedList = [...checked];
+
+    if (event.target.checked) {
+      updatedList.push(event.target.value);
+    } else {
+      const index = checked.indexOf(event.target.value);
+      if (index !== -1) {
+        updatedList.splice(index, 1);
+      }
+    }
+
+    setChecked(updatedList);
+  };
+  const checkedItems = checked.length > 0 ? `${checked.length}` : "";
 
   return (
     <div className="gallery-body">
       <div className="top-title-section">
-        <h2>Gallery</h2>
-        <h3>
-          <a href="">Delete Files</a>
-        </h3>
+        {!checkedItems ? (
+          <h2>Gallery</h2>
+        ) : (
+          <p style={{ fontWeight: "bold", fontSize: "20px" }}>
+            <input type="checkbox" checked style={{ marginRight: "5px" }} />
+            {`${checkedItems} Files Selected`}
+          </p>
+        )}
+
+        <div className="selected-count">
+          {/* Selected Items: {selectedItems.length} */}
+        </div>
+        {checkedItems ? (
+          <h3>
+            {" "}
+            <a href="">Delete Files</a>{" "}
+          </h3>
+        ) : (
+          ""
+        )}
       </div>
       <hr />
       <div className="image-gallery">
         {images?.map((image, index) => (
-          <ImageItem 
-          key={index} 
-          src={image} 
-          isFeatured={index === 0}
-          draggable
-          onDragStart={() => (dragItem.current=index)}
-          onDragEnter={() => (dragOverItem.current=index)}
-          onDragEnd={handleSort}
-          onDragOver={(e) => e.preventDefault()}
-          setImage={image}
-           />
+          <ImageItem
+            key={index}
+            src={image}
+            isFeatured={index === 0}
+            draggable
+            onDragStart={() => (dragItem.current = index)}
+            onDragEnter={() => (dragOverItem.current = index)}
+            onDragEnd={handleSort}
+            onDragOver={(e) => e.preventDefault()}
+            setImage={image}
+            handleCheck={handleCheck}
+            checkedItems={checkedItems}
+          />
         ))}
       </div>
     </div>
