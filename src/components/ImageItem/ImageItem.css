@@ -46,12 +46,7 @@ img {
   cursor: pointer;
 }
 
-.active-checkbox {
-  /* Styles for the active checkbox */
-  background-color: #007bff; /* Change to the color you want */
-  border: 1px solid #007bff; /* Match the background color */
-  color: #fff; /* Text color when active */
-}
+ 
 
 /* Activate the overlay color when the checkbox is checked */
 .image-overlay.selected {

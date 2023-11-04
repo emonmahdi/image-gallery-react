@@ -37,3 +37,23 @@
   padding: 6px;
   border-radius: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    max-width: 800px;
+    box-shadow: inset;
+    padding: 6px;
+    border-radius: 10px;
+  }
+}
+@media only screen and (max-width: 250px) {
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+    max-width: auto;
+  }
+}

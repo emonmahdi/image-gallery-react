@@ -14,18 +14,9 @@ const ImageItem = ({
   checkedItems,
   handleCheck,
 }) => {
-  const [selectedImages, setSelectedImages] = useState([]);
-  // console.log("selected ", selectedImages);
-
-  // const toggleImageSelection = (imageId) => {
-  //   if (selectedImages.includes(imageId)) {
-  //     setSelectedImages(selectedImages.filter((id) => id !== imageId));
-  //   } else {
-  //     setSelectedImages([...selectedImages, imageId]);
-  //   }
-  // };
   const [isSelected, setIsSelected] = useState(false);
 
+  // Toggle the selected state
   const toggleImageSelection = (imageId) => {
     setIsSelected(!isSelected);
     handleCheck({
@@ -60,9 +51,7 @@ const ImageItem = ({
               type="checkbox"
               checked={isSelected}
               onClick={() => toggleImageSelection(src.id)}
-              className={`input-checkbox ${
-                isSelected ? "active-checkbox" : ""
-              }`}
+              className="input-checkbox"
               readOnly
             />
           ) : (
@@ -70,9 +59,7 @@ const ImageItem = ({
               type="checkbox"
               checked={isSelected}
               onChange={() => toggleImageSelection(src.id)}
-              className={`input-checkbox ${
-                isSelected ? "active-checkbox" : ""
-              }`}
+              className="input-checkbox"
             />
           )}
         </div>

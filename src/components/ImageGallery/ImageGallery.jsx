@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+import "./ImageGallery.css";
 import ImageItem from "../ImageItem/ImageItem";
 import img1 from "./../../assets/images/image-1.webp";
 import img2 from "./../../assets/images/image-2.webp";
@@ -10,9 +12,6 @@ import img8 from "./../../assets/images/image-8.webp";
 import img9 from "./../../assets/images/image-9.webp";
 import img10 from "./../../assets/images/image-10.jpeg";
 import img11 from "./../../assets/images/image-11.jpeg";
-
-import "./ImageGallery.css";
-import { useRef, useState } from "react";
 
 const imagess = [
   {
@@ -63,20 +62,23 @@ const imagess = [
 
 const ImageGallery = () => {
   const [images, setImages] = useState(imagess);
+  const [checked, setChecked] = useState([]);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
 
-  // handle drag sorting
+  // Handle drag sorting
   const handleSort = () => {
     let imageItems = [...images];
 
-    // remove and save the dragged item content
+    // Remove and save the dragged item content
     const dragContentItem = imageItems.splice(dragItem.current, 1)[0];
 
-    // switch the position
+    // Switch the position
     imageItems.splice(dragOverItem.current, 0, dragContentItem);
 
-    // reset the position ref
+    // Reset the position ref
     dragItem.current = null;
     dragOverItem.current = null;
 
@@ -84,9 +86,7 @@ const ImageGallery = () => {
     setImages(imageItems);
   };
 
-  // new
-  const [checked, setChecked] = useState([]);
-
+  // Handle checkbox input
   const handleCheck = (event) => {
     let updatedList = [...checked];
 
@@ -101,10 +101,11 @@ const ImageGallery = () => {
 
     setChecked(updatedList);
   };
+
+  // Get the number of checked items
   const checkedItems = checked.length > 0 ? `${checked.length}` : "";
 
-  const [isDeleting, setIsDeleting] = useState(false);
-  // delete
+  // Handle image deletion
   const deleteSelectedImages = () => {
     if (checked.length > 0) {
       const updatedImages = images.filter(
@@ -157,7 +158,6 @@ const ImageGallery = () => {
             setImage={image}
             handleCheck={handleCheck}
             checkedItems={checkedItems}
-            isDeleting={isDeleting}
           />
         ))}
       </div>
