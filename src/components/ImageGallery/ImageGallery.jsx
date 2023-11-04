@@ -121,24 +121,24 @@ const ImageGallery = () => {
     <div className="gallery-body">
       <div className="top-title-section">
         {!checkedItems ? (
-          <h2>Gallery</h2>
+          <h3>Gallery</h3>
         ) : (
-          <p style={{ fontWeight: "bold", fontSize: "20px" }}>
+          <h4 style={{ fontWeight: "bold", fontSize: "20px" }}>
             <input type="checkbox" checked style={{ marginRight: "5px" }} />
             {`${checkedItems} Files Selected`}
-          </p>
+          </h4>
         )}
 
         <div className="selected-count">
           {/* Selected Items: {selectedItems.length} */}
         </div>
         {checkedItems ? (
-          <h3>
+          <h4>
             {" "}
             <a onClick={deleteSelectedImages} style={{ cursor: "pointer" }}>
               Delete Files
             </a>{" "}
-          </h3>
+          </h4>
         ) : (
           ""
         )}

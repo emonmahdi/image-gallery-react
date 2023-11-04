@@ -1,5 +1,6 @@
 .image-item {
   border-radius: 10px;
+  outline: none;
   border: 1px solid #ccc;
   overflow: hidden;
   position: relative;
@@ -27,7 +28,7 @@ img {
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -45,8 +46,6 @@ img {
   border-radius: 30%;
   cursor: pointer;
 }
-
- 
 
 /* Activate the overlay color when the checkbox is checked */
 .image-overlay.selected {
