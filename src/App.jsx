@@ -1,9 +1,14 @@
 import ImageGallery from "./components/ImageGallery/ImageGallery";
-// import Test from "./components/Test/Test";
+import { Counter } from "./redux/Counter";
+
+import Test from "./components/Test/Test";
 
 function App() {
   return (
     <>
+      <div>
+        <Counter />
+      </div>
       <div
         style={{
           display: "flex",

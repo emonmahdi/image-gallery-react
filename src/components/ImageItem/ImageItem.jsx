@@ -36,7 +36,11 @@ const ImageItem = ({
         setSelectedImages={setImage}
         key={key}
       >
-        <img src={src} onChange={() => toggleImageSelection(key)} alt="Image" />
+        <img
+          src={src.img}
+          onChange={() => toggleImageSelection(key)}
+          alt="Image"
+        />
         <div
           className={`image-overlay ${
             selectedImages.includes(key) ? `selected` : ""

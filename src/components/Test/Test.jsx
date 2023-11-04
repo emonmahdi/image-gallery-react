@@ -1,10 +1,18 @@
-import { useState } from "react";
-import "./Test.css";
+import React, { useState } from "react";
+import img1 from "./../../assets/images/image-1.webp";
+import img2 from "./../../assets/images/image-2.webp";
+import img3 from "./../../assets/images/image-3.webp";
 
-const Test = () => {
+function Test() {
+  const [images, setImages] = useState([
+    { id: 1, src: `${img1}` },
+    { id: 2, src: `${img2}` },
+    { id: 3, src: `${img3}` },
+    // Add more image objects as needed
+  ]);
   const [selectedImages, setSelectedImages] = useState([]);
 
-  const toggleImageSelection = (imageId) => {
+  const handleCheckboxChange = (imageId) => {
     if (selectedImages.includes(imageId)) {
       setSelectedImages(selectedImages.filter((id) => id !== imageId));
     } else {
@@ -12,57 +20,38 @@ const Test = () => {
     }
   };
 
-  const images = [
-    {
-      id: 1,
-      src: "https://i.ibb.co/ns9rW3g/office-2.jpg",
-      alt: "Image 1",
-    },
-    {
-      id: 2,
-      src: "https://i.ibb.co/vxQkNQF/office-3.jpg",
-      alt: "Image 2",
-    },
-    {
-      id: 3,
-      src: "https://i.ibb.co/R7dCMVf/living-2.jpg",
-      alt: "Image 3",
-    },
-    {
-      id: 4,
-      src: "https://i.ibb.co/0ZvXwt9/Living-1.jpg",
-      alt: "Image 4",
-    },
-  ];
+  const handleDeleteSelected = () => {
+    const updatedImages = images.filter(
+      (image) => !selectedImages.includes(image.id)
+    );
+    setImages(updatedImages);
+    setSelectedImages([]);
+  };
 
   return (
-    <div className="image-gallery">
-      {images.map((image) => (
-        <div
-          key={image.id}
-          className={`image-item ${
-            selectedImages.includes(image.id) ? "selected" : ""
-          }`}
-        >
-          <img
-            src={image.src}
-            alt={image.alt}
-            onClick={() => toggleImageSelection(image.id)}
-          />
-          <div className="image-overlay">
-            <label>
-              <input
-                type="checkbox"
-                checked={selectedImages.includes(image.id)}
-                onChange={() => toggleImageSelection(image.id)}
-              />
-              <span>Selected</span>
-            </label>
-          </div>
-        </div>
-      ))}
+    <div>
+      <button onClick={handleDeleteSelected}>Delete Selected</button>
+      <ul>
+        {images.map((image) => (
+          <li
+            key={image.id}
+            style={{ display: "flex", alignItems: "center", margin: "5px" }}
+          >
+            <input
+              type="checkbox"
+              checked={selectedImages.includes(image.id)}
+              onChange={() => handleCheckboxChange(image.id)}
+            />
+            <img
+              src={image.src}
+              style={{ width: "300px", height: "auto" }}
+              alt={`Image ${image.id}`}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default Test;
