@@ -103,6 +103,19 @@ const ImageGallery = () => {
   };
   const checkedItems = checked.length > 0 ? `${checked.length}` : "";
 
+  const [isDeleting, setIsDeleting] = useState(false);
+  // delete
+  const deleteSelectedImages = () => {
+    if (checked.length > 0) {
+      const updatedImages = images.filter(
+        (image) => !checked.includes(image.id)
+      );
+      setImages(updatedImages);
+      setChecked([]);
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <div className="gallery-body">
       <div className="top-title-section">
@@ -121,7 +134,9 @@ const ImageGallery = () => {
         {checkedItems ? (
           <h3>
             {" "}
-            <a href="">Delete Files</a>{" "}
+            <a onClick={deleteSelectedImages} style={{ cursor: "pointer" }}>
+              Delete Files
+            </a>{" "}
           </h3>
         ) : (
           ""
@@ -142,6 +157,7 @@ const ImageGallery = () => {
             setImage={image}
             handleCheck={handleCheck}
             checkedItems={checkedItems}
+            isDeleting={isDeleting}
           />
         ))}
       </div>

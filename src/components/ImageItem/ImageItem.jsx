@@ -17,12 +17,23 @@ const ImageItem = ({
   const [selectedImages, setSelectedImages] = useState([]);
   // console.log("selected ", selectedImages);
 
+  // const toggleImageSelection = (imageId) => {
+  //   if (selectedImages.includes(imageId)) {
+  //     setSelectedImages(selectedImages.filter((id) => id !== imageId));
+  //   } else {
+  //     setSelectedImages([...selectedImages, imageId]);
+  //   }
+  // };
+  const [isSelected, setIsSelected] = useState(false);
+
   const toggleImageSelection = (imageId) => {
-    if (selectedImages.includes(imageId)) {
-      setSelectedImages(selectedImages.filter((id) => id !== imageId));
-    } else {
-      setSelectedImages([...selectedImages, imageId]);
-    }
+    setIsSelected(!isSelected);
+    handleCheck({
+      target: {
+        checked: !isSelected,
+        value: imageId,
+      },
+    });
   };
 
   return (
@@ -38,23 +49,32 @@ const ImageItem = ({
       >
         <img
           src={src.img}
-          onChange={() => toggleImageSelection(key)}
           alt="Image"
+          style={{
+            opacity: isSelected ? 0.6 : 1, // Reduce opacity when selected
+          }}
         />
-        <div
-          className={`image-overlay ${
-            selectedImages.includes(key) ? `selected` : ""
-          }`}
-        >
-          <input
-            type="checkbox"
-            checked={selectedImages.includes(key)}
-            onClick={() => toggleImageSelection(key)}
-            className="input-checkbox"
-            // onChange={() => handleOnChange(index)}
-            onChange={handleCheck}
-            readOnly
-          />
+        <div className={`image-overlay ${isSelected ? `selected` : ""}`}>
+          {checkedItems ? (
+            <input
+              type="checkbox"
+              checked={isSelected}
+              onClick={() => toggleImageSelection(src.id)}
+              className={`input-checkbox ${
+                isSelected ? "active-checkbox" : ""
+              }`}
+              readOnly
+            />
+          ) : (
+            <input
+              type="checkbox"
+              checked={isSelected}
+              onChange={() => toggleImageSelection(src.id)}
+              className={`input-checkbox ${
+                isSelected ? "active-checkbox" : ""
+              }`}
+            />
+          )}
         </div>
       </div>
     </>
